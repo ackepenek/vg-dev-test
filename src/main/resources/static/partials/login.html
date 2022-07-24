@@ -1,21 +1,24 @@
-<h1>Login</h1>
-
-<form>
-    <md-input-container>
-        <label>Username</label>
-        <input type="text" ng-model="login.username" required>
-    </md-input-container>
-
-    <md-input-container>
-        <label>Password</label>
-        <input type="text" ng-model="login.password" required>
-    </md-input-container>
-
-    <p style="color:red" ng-show="invalidCreds">Invalid credentials</p>
-
-    <div class="action-buttons">
-        <md-button ng-click="login()">
-            Login
-        </md-button>
-    </div>
-</form>
+<div layout="column" layout-align="center center" layout-fill="layout-fill">
+    <form name="loginForm">
+        <p class="error" ng-show="invalidCreds">The user could not be found for given credentials!</p>
+        <md-content layout="column" class="md-padding">
+                <md-input-container>
+                    <label>Username</label>
+                    <input required type="text" ng-model="login.username" name="username" />
+                    <div ng-messages="loginForm.username.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input required type="password" ng-model="login.password" name="password" />
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <div layout="row" layout-align="center center">
+                    <md-button type="button" ng-disabled="!loginForm.$valid" ng-click="loginForm.$valid && login()" class="md-raised">Login</md-button>
+                </div>
+            </md-content>
+        </form>
+</div>
